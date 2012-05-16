@@ -26,6 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "Directory.h"
 
 
+
 CatalogBuilder::CatalogBuilder(PluginHandler* plugs) :
 	plugins(plugs),
 	progress(CATALOG_PROGRESS_MAX)
@@ -39,18 +40,18 @@ void CatalogBuilder::buildCatalog()
 	progress = CATALOG_PROGRESS_MIN;
 	emit catalogIncrement(progress);
 	catalog->incrementTimestamp();
-	indexed.clear();
+    indexed.clear();
 
 	QList<Directory> memDirs = SettingsManager::readCatalogDirectories();
 	QHash<uint, PluginInfo> pluginsInfo = plugins->getPlugins();
 	totalItems = memDirs.count() + pluginsInfo.count();
-	currentItem = 0;
+    currentItem = 0;
 
 	while (currentItem < memDirs.count())
-	{
+    {
 		QString cur = platform->expandEnvironmentVars(memDirs[currentItem].name);
 		indexDirectory(cur, memDirs[currentItem].types, memDirs[currentItem].indexDirs, memDirs[currentItem].indexExe, memDirs[currentItem].depth);
-		progressStep(currentItem);
+        progressStep(currentItem);
 	}
 
 	// Don't call the pluginhandler to request catalog because we need to track progress
@@ -59,7 +60,7 @@ void CatalogBuilder::buildCatalog()
 	catalog->purgeOldItems();
 	indexed.clear();
 	progress = CATALOG_PROGRESS_MAX;
-	emit catalogFinished();
+    emit catalogFinished();
 }
 
 
@@ -69,6 +70,7 @@ void CatalogBuilder::indexDirectory(const QString& directory, const QStringList&
 	QDir qd(dir);
 	dir = qd.absolutePath();
 	QStringList dirs = qd.entryList(QDir::AllDirs);
+    ::Sleep(2); //TODO: try rewriting this shitty resource-hogging function. maybe.
 
 	if (depth > 0)
 	{
@@ -174,6 +176,6 @@ bool CatalogBuilder::progressStep(int newStep)
 		progress = newProgress;
 		emit catalogIncrement(progress);
 	}
-
+    //::Sleep(10000);
 	return true;
 }
