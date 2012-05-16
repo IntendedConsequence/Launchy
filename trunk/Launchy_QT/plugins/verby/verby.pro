@@ -4,7 +4,7 @@ CONFIG += plugin \
 VPATH += ../../src/
 INCLUDEPATH += ../../src/
 PRECOMPILED_HEADER = precompiled.h
-UI_DIR = ../../plugins/Verby/
+#UI_DIR = ../../plugins/Verby/
 FORMS = dlg.ui
 HEADERS = plugin_interface.h \
     gui.h \

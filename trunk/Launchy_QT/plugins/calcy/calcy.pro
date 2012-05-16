@@ -32,7 +32,7 @@ unix:!macx {
     INSTALLS += target \
         icon
 }
-FORMS += dlg.ui
+FORMS = dlg.ui
 
 macx {
   if(!debug_and_release|build_pass):CONFIG(debug, debug|release):DESTDIR = ../../debug/Launchy.app/Contents/MacOS/plugins

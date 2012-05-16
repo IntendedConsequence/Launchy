@@ -1,12 +1,11 @@
 TEMPLATE = lib
-CONFIG += plugin \
-    debug_and_release
+CONFIG += plugin debug_and_release
 VPATH += ../../src
 INCLUDEPATH += ../../src
 INCLUDEPATH += ../../common
 INCLUDEPATH += c:/boost/
 PRECOMPILED_HEADER = precompiled.h
-UI_DIR = ../../plugins/runner/
+#UI_DIR = ../../plugins/runner/
 FORMS = dlg.ui
 HEADERS = plugin_interface.h \
     runner.h \
@@ -22,9 +21,7 @@ SOURCES = plugin_interface.cpp \
 	../../common/FileBrowser.cpp \
 	../../common/FileBrowserDelegate.cpp \
 	../../common/DropTableWidget.cpp
-TARGET \
-    = \
-    runner
+TARGET = runner
 win32 { 
     CONFIG -= embed_manifest_dll
 	LIBS += user32.lib shell32.lib

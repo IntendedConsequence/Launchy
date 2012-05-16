@@ -7,7 +7,7 @@ PRECOMPILED_HEADER = precompiled.h
 INCLUDEPATH += ../../src/
 INCLUDEPATH += c:/boost/
 INCLUDEPATH += ../../common
-UI_DIR = ../../plugins/weby/
+#UI_DIR = ../../plugins/weby/
 FORMS = dlg.ui
 HEADERS = plugin_interface.h \
     weby.h \
