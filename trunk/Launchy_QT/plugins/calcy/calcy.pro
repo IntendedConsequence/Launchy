@@ -5,7 +5,7 @@ VPATH += ../../src/
 INCLUDEPATH += ../../src/
 INCLUDEPATH += c:/boost/
 PRECOMPILED_HEADER = precompiled.h
-UI_DIR = ../../plugins/calcy/
+#UI_DIR = ../../plugins/calcy/
 HEADERS = plugin_interface.h \
     calcy.h \
     precompiled.h \
