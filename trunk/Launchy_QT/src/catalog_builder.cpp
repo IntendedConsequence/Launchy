@@ -25,7 +25,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "main.h"
 #include "Directory.h"
 
-
+class CanIHazSleep : QThread
+{
+public:
+    // This is quite an hack, I want to sleep whenever I want
+    // QT, Y YOUR SLEEP IS PROTECTED?
+    static void msleep(unsigned long ms)
+    {
+        QThread::msleep(ms);
+    }
+};
 
 CatalogBuilder::CatalogBuilder(PluginHandler* plugs) :
 	plugins(plugs),
@@ -70,7 +79,6 @@ void CatalogBuilder::indexDirectory(const QString& directory, const QStringList&
 	QDir qd(dir);
 	dir = qd.absolutePath();
 	QStringList dirs = qd.entryList(QDir::AllDirs);
-    ::Sleep(2); //TODO: try rewriting this shitty resource-hogging function. maybe.
 
 	if (depth > 0)
 	{
@@ -90,6 +98,9 @@ void CatalogBuilder::indexDirectory(const QString& directory, const QStringList&
                                     }
                                     else
 #endif
+
+                    // Sleep shoud be here :)
+                    CanIHazSleep::msleep(10);
 					indexDirectory(dir + "/" + dirs[i], filters, fdirs, fbin, depth-1);
 				}
 			}
@@ -176,6 +187,5 @@ bool CatalogBuilder::progressStep(int newStep)
 		progress = newProgress;
 		emit catalogIncrement(progress);
 	}
-    //::Sleep(10000);
 	return true;
 }
