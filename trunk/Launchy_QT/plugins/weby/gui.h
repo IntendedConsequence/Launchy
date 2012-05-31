@@ -26,27 +26,27 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 class Gui : public QWidget, private Ui::Dlg
 {
-	Q_OBJECT
+    Q_OBJECT
 private:
-	QList<WebySite> sites;
+    QList<WebySite> sites;
 public:
-	Gui(QWidget* parent, QSettings* settings);
-	~Gui() { this->hide(); }
-	void writeOptions();
-	QString defaultName;
+    Gui(QWidget* parent, QSettings* settings);
+    ~Gui() { this->hide(); }
+    void writeOptions();
+    QString defaultName;
 
 public slots:
-	void newRow();
-	void remRow();
-	void dragEnter(QDragEnterEvent *event);
-	void drop(QDropEvent *event);
-	void makeDefault();
-	void clearDefault();
+    void newRow();
+    void remRow();
+    void dragEnter(QDragEnterEvent *event);
+    void drop(QDropEvent *event);
+    void makeDefault();
+    void clearDefault();
 
 private:
-	void appendRow(const QString& name, const QString& path);
+    void appendRow(const QString& name, const QString& path);
 
-	QSettings* settings;
+    QSettings* settings;
 };
 
 #endif 

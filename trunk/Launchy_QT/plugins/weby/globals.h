@@ -35,9 +35,9 @@ struct WebySite {
 };
 
 struct Bookmark {
-	QString url;
-	QString shortcut;
-	QString name;
+    QString url;
+    QString shortcut;
+    QString name;
 };
 
 #endif

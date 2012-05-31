@@ -26,27 +26,27 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void runProgram(QString path, QString args) {
 #ifdef Q_WS_WIN
-	SHELLEXECUTEINFO ShExecInfo;
+    SHELLEXECUTEINFO ShExecInfo;
 
-	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
-	ShExecInfo.fMask = SEE_MASK_FLAG_NO_UI;
-	ShExecInfo.hwnd = NULL;
-	ShExecInfo.lpVerb = NULL;
-	ShExecInfo.lpFile = (LPCTSTR) (path).utf16();
-	if (args != "") {
-		ShExecInfo.lpParameters = (LPCTSTR) args.utf16();
-	} else {
-		ShExecInfo.lpParameters = NULL;
-	}
-	QDir dir(path);
-	QFileInfo info(path);
-	if (!info.isDir() && info.isFile())
-		dir.cdUp();
-	ShExecInfo.lpDirectory = (LPCTSTR)QDir::toNativeSeparators(dir.absolutePath()).utf16();
-	ShExecInfo.nShow = SW_NORMAL;
-	ShExecInfo.hInstApp = NULL;
+    ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+    ShExecInfo.fMask = SEE_MASK_FLAG_NO_UI;
+    ShExecInfo.hwnd = NULL;
+    ShExecInfo.lpVerb = NULL;
+    ShExecInfo.lpFile = (LPCTSTR) (path).utf16();
+    if (args != "") {
+        ShExecInfo.lpParameters = (LPCTSTR) args.utf16();
+    } else {
+        ShExecInfo.lpParameters = NULL;
+    }
+    QDir dir(path);
+    QFileInfo info(path);
+    if (!info.isDir() && info.isFile())
+        dir.cdUp();
+    ShExecInfo.lpDirectory = (LPCTSTR)QDir::toNativeSeparators(dir.absolutePath()).utf16();
+    ShExecInfo.nShow = SW_NORMAL;
+    ShExecInfo.hInstApp = NULL;
 
-	ShellExecuteEx(&ShExecInfo);	
+    ShellExecuteEx(&ShExecInfo);    
 #endif
 
 #ifdef Q_WS_MAC

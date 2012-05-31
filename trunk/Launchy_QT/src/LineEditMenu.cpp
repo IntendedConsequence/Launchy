@@ -2,13 +2,13 @@
 
 
 LineEditMenu::LineEditMenu(QWidget* parent) :
-	QLabel(parent)
+    QLabel(parent)
 {
-	setAttribute(Qt::WA_InputMethodEnabled);
+    setAttribute(Qt::WA_InputMethodEnabled);
 }
 
 
 void LineEditMenu::contextMenuEvent(QContextMenuEvent *evt)
 {
-	emit menuEvent(evt);
+    emit menuEvent(evt);
 }

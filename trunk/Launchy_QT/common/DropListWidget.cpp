@@ -22,9 +22,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 DropListWidget::DropListWidget(QWidget* pParent) :
-	QListWidget(pParent)
+    QListWidget(pParent)
 {
-	setAcceptDrops(true);
+    setAcceptDrops(true);
 }
 
 
@@ -35,17 +35,17 @@ DropListWidget::~DropListWidget()
 
 void DropListWidget::dragEnterEvent(QDragEnterEvent *event)
 {
-	emit dragEnter(event);
+    emit dragEnter(event);
 }
 
 
 void DropListWidget::dragMoveEvent(QDragMoveEvent *event)
 {
-	emit dragMove(event);
+    emit dragMove(event);
 }
 
 
 void DropListWidget::dropEvent(QDropEvent *event)
 {
-	emit drop(event);
+    emit drop(event);
 }

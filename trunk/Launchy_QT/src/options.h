@@ -30,56 +30,56 @@ class OptionsDialog : public QDialog, private Ui::OptionsDlg
   Q_OBJECT
 
 public:
-	OptionsDialog(QWidget* parent = 0);
-	~OptionsDialog();
+    OptionsDialog(QWidget* parent = 0);
+    ~OptionsDialog();
 
     virtual void setVisible(bool visible);
 
 public slots:
-	void accept();
-	void reject();
-	void autoUpdateCheckChanged(int state);
-	void tabChanged(int tab);
-	void skinChanged(const QString& newSkin);
-	void dirRowChanged(int row);
-	void catDirItemChanged(QListWidgetItem* item);
-	void catDirDragEnter(QDragEnterEvent *event);
-	void catDirDrop(QDropEvent *event);
-	void catDirPlusClicked(bool c);
-	void catDirMinusClicked(bool c);
-	void catTypesItemChanged(QListWidgetItem* item);
-	void catTypesPlusClicked(bool c);
-	void catTypesMinusClicked(bool c);
-	void catTypesDirChanged(int);
-	void catTypesExeChanged(int);
-	void catDepthChanged(int);
-	void catalogProgressUpdated(int);
-	void catalogBuilt();
-	void catRescanClicked(bool);
-	void pluginChanged(int row);
-	void pluginItemChanged(QListWidgetItem* state);
+    void accept();
+    void reject();
+    void autoUpdateCheckChanged(int state);
+    void tabChanged(int tab);
+    void skinChanged(const QString& newSkin);
+    void dirRowChanged(int row);
+    void catDirItemChanged(QListWidgetItem* item);
+    void catDirDragEnter(QDragEnterEvent *event);
+    void catDirDrop(QDropEvent *event);
+    void catDirPlusClicked(bool c);
+    void catDirMinusClicked(bool c);
+    void catTypesItemChanged(QListWidgetItem* item);
+    void catTypesPlusClicked(bool c);
+    void catTypesMinusClicked(bool c);
+    void catTypesDirChanged(int);
+    void catTypesExeChanged(int);
+    void catDepthChanged(int);
+    void catalogProgressUpdated(int);
+    void catalogBuilt();
+    void catRescanClicked(bool);
+    void pluginChanged(int row);
+    void pluginItemChanged(QListWidgetItem* state);
 
 private:
-	void addDirectory(const QString& directory, bool edit = false);
-	void loadPluginDialog(QListWidgetItem* item);
-	void connectCatalogBuilderEvents();
+    void addDirectory(const QString& directory, bool edit = false);
+    void loadPluginDialog(QListWidgetItem* item);
+    void connectCatalogBuilderEvents();
 
 private:
-	FileBrowserDelegate directoryItemDelegate;
-	int curPlugin;
-	bool needRescan;
-	QStringList metaKeys;
-	QStringList actionKeys;
-	QList<int> iMetaKeys;
-	QList<int> iActionKeys;
-	QList<Directory> memDirs;
-	QList<QPair<QString, uint> > pluginNames;
-	QVBoxLayout* pluginLayout;
-	QString lastDir;
+    FileBrowserDelegate directoryItemDelegate;
+    int curPlugin;
+    bool needRescan;
+    QStringList metaKeys;
+    QStringList actionKeys;
+    QList<int> iMetaKeys;
+    QList<int> iActionKeys;
+    QList<Directory> memDirs;
+    QList<QPair<QString, uint> > pluginNames;
+    QVBoxLayout* pluginLayout;
+    QString lastDir;
 
-	static QByteArray windowGeometry;
-	static int currentTab;
-	static int currentPlugin;
+    static QByteArray windowGeometry;
+    static int currentTab;
+    static int currentPlugin;
 };
 
 

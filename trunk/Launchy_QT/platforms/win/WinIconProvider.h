@@ -24,17 +24,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 class WinIconProvider : QFileIconProvider
 {
 public:
-	WinIconProvider();
-	~WinIconProvider();
+    WinIconProvider();
+    ~WinIconProvider();
 
-	virtual QIcon icon(const QFileInfo& info) const;
-	void setPreferredIconSize(int size);
+    virtual QIcon icon(const QFileInfo& info) const;
+    void setPreferredIconSize(int size);
 
 private:
-	bool addIconFromImageList(int imageListIndex, int iconIndex, QIcon& icon) const;
-	bool addIconFromShellFactory(QString filePath, QIcon& icon) const;
+    bool addIconFromImageList(int imageListIndex, int iconIndex, QIcon& icon) const;
+    bool addIconFromShellFactory(QString filePath, QIcon& icon) const;
 
-	int preferredSize;
+    int preferredSize;
 };
 
 

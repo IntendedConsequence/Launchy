@@ -28,18 +28,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 class CommandHistory
 {
 public:
-	CommandHistory();
+    CommandHistory();
 
-	bool load(const QString& filename);
-	void save(const QString& filename) const;
+    bool load(const QString& filename);
+    void save(const QString& filename) const;
 
-	void addItem(const InputDataList& item);
-	void removeAt(int index);
-	InputDataList& getItem(int index);
-	void search(const QString& searchText, QList<CatItem>& searchResults) const;
+    void addItem(const InputDataList& item);
+    void removeAt(int index);
+    InputDataList& getItem(int index);
+    void search(const QString& searchText, QList<CatItem>& searchResults) const;
 
 private:
-	QList<InputDataList> history;
+    QList<InputDataList> history;
 };
 
 

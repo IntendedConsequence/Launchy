@@ -24,31 +24,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 class Fader : public QThread
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	Fader(QObject* parent = NULL);
-	~Fader();
-	
-	void fadeIn(bool quick);
-	void fadeOut(bool quick);
-	void run();
+    Fader(QObject* parent = NULL);
+    ~Fader();
+    
+    void fadeIn(bool quick);
+    void fadeOut(bool quick);
+    void run();
 
-	inline void stop() { keepRunning = false; }
-	inline bool isFading() const { return delta < 0 && isRunning(); }
+    inline void stop() { keepRunning = false; }
+    inline bool isFading() const { return delta < 0 && isRunning(); }
 
 signals:
-	void fadeLevel(double level);
+    void fadeLevel(double level);
 
 private:
-	QMutex mutex;
-	bool keepRunning;
+    QMutex mutex;
+    bool keepRunning;
 
-	double delta;
-	int delay;
+    double delta;
+    int delay;
 
-	double level;
-	double targetLevel;
+    double level;
+    double targetLevel;
 };
 
 

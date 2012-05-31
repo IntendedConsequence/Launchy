@@ -31,21 +31,21 @@ class Gui : public QWidget, private Ui::Dlg
 
   Q_OBJECT
 public:
-	Gui(QWidget* parent, QSettings* settings);
-	~Gui() { this->hide(); }
-	void writeOptions();
+    Gui(QWidget* parent, QSettings* settings);
+    ~Gui() { this->hide(); }
+    void writeOptions();
 
 private slots:
-	void newRow();
-	void remRow();
-	void dragEnter(QDragEnterEvent *event);
-	void drop(QDropEvent *event);
+    void newRow();
+    void remRow();
+    void dragEnter(QDragEnterEvent *event);
+    void drop(QDropEvent *event);
 
 private:
-	void appendRow(const QString& name, const QString& file, const QString& args);
+    void appendRow(const QString& name, const QString& file, const QString& args);
 
-	QSettings* settings;
-	FileBrowserDelegate delegate;
+    QSettings* settings;
+    FileBrowserDelegate delegate;
 };
 
 #endif 

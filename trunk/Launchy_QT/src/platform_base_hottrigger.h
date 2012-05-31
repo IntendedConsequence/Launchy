@@ -53,7 +53,7 @@ private:
         ~KeyTrigger();
 
         friend class GlobalShortcutManager;
-		bool isConnected();
+        bool isConnected();
 
         /**
          * Platform-specific helper

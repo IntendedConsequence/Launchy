@@ -29,45 +29,45 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 class PlatformBase : public QApplication
 {
 public:
-	PlatformBase(int& argc, char** argv) : 
-	  QApplication(argc, argv)
-	{
-		platform = this;
-	}
+    PlatformBase(int& argc, char** argv) : 
+      QApplication(argc, argv)
+    {
+        platform = this;
+    }
 
-	virtual ~PlatformBase()
-	{
-		if (icons)
-		{
-			delete icons;
-			icons = NULL;
-		}
-	}
+    virtual ~PlatformBase()
+    {
+        if (icons)
+        {
+            delete icons;
+            icons = NULL;
+        }
+    }
 
-	QIcon icon(const QFileInfo& info) { return icons->icon(info); }
-	QIcon icon(QFileIconProvider::IconType type) { return icons->icon(type); }
-	virtual void setPreferredIconSize(int size) = 0;
+    QIcon icon(const QFileInfo& info) { return icons->icon(info); }
+    QIcon icon(QFileIconProvider::IconType type) { return icons->icon(type); }
+    virtual void setPreferredIconSize(int size) = 0;
 
-	virtual QList<Directory> getDefaultCatalogDirectories() = 0;
-	virtual bool isAlreadyRunning() const = 0;
-	virtual void sendInstanceCommand(int command) { Q_UNUSED(command); }
+    virtual QList<Directory> getDefaultCatalogDirectories() = 0;
+    virtual bool isAlreadyRunning() const = 0;
+    virtual void sendInstanceCommand(int command) { Q_UNUSED(command); }
 
-	// Set hotkey
-	virtual QKeySequence getHotkey() const = 0;
-	virtual bool setHotkey(const QKeySequence& key, QObject* receiver, const char* slot) = 0;
+    // Set hotkey
+    virtual QKeySequence getHotkey() const = 0;
+    virtual bool setHotkey(const QKeySequence& key, QObject* receiver, const char* slot) = 0;
 
-	// Need to alter an indexed item?  e.g. .desktop files
-	virtual void alterItem(CatItem*) { }
-	virtual QHash<QString, QList<QString> > getDirectories() = 0;
-	virtual QString expandEnvironmentVars(QString txt) = 0;
+    // Need to alter an indexed item?  e.g. .desktop files
+    virtual void alterItem(CatItem*) { }
+    virtual QHash<QString, QList<QString> > getDirectories() = 0;
+    virtual QString expandEnvironmentVars(QString txt) = 0;
 
-	virtual bool supportsAlphaBorder() const { return false; }
-	virtual bool getComputers(QStringList& computers) const { Q_UNUSED(computers); return false; }
+    virtual bool supportsAlphaBorder() const { return false; }
+    virtual bool getComputers(QStringList& computers) const { Q_UNUSED(computers); return false; }
 
 
 protected:
-	QFileIconProvider* icons;
-	QKeySequence hotkey;
+    QFileIconProvider* icons;
+    QKeySequence hotkey;
 };
 
 

@@ -28,9 +28,9 @@ class Gui : public QWidget, private Ui::Dlg
         Q_OBJECT
 
 public:
-	Gui(QWidget* parent);
-	~Gui() { this->hide(); }
-	void writeOptions();
+    Gui(QWidget* parent);
+    ~Gui() { this->hide(); }
+    void writeOptions();
 };
 
 #endif 

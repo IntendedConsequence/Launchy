@@ -22,58 +22,58 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 Gui::Gui(QWidget* parent) 
-	: QWidget(parent)
+    : QWidget(parent)
 {
-	setupUi(this);
-	QSettings* settings = *gwinshellInstance->settings;
-	if (settings == NULL) return;
+    setupUi(this);
+    QSettings* settings = *gwinshellInstance->settings;
+    if (settings == NULL) return;
 
-	
-	// Read in the array of websites from options
-	table->setSortingEnabled(false);
-	int count = settings->beginReadArray("winshell/cmds");
-	table->setRowCount(count);
-	for(int i = 0; i < count; ++i) {
-		settings->setArrayIndex(i);
-		table->setItem(i, 0, new QTableWidgetItem(settings->value("name").toString()));
-		table->setItem(i, 1, new QTableWidgetItem(settings->value("file").toString()));
-		table->setItem(i, 2, new QTableWidgetItem(settings->value("args").toString()));
-	}
-	settings->endArray();
-	table->setSortingEnabled(true);
+    
+    // Read in the array of websites from options
+    table->setSortingEnabled(false);
+    int count = settings->beginReadArray("winshell/cmds");
+    table->setRowCount(count);
+    for(int i = 0; i < count; ++i) {
+        settings->setArrayIndex(i);
+        table->setItem(i, 0, new QTableWidgetItem(settings->value("name").toString()));
+        table->setItem(i, 1, new QTableWidgetItem(settings->value("file").toString()));
+        table->setItem(i, 2, new QTableWidgetItem(settings->value("args").toString()));
+    }
+    settings->endArray();
+    table->setSortingEnabled(true);
 
-	connect(tableNew, SIGNAL(clicked(bool)), this, SLOT(newRow(void)));
-	connect(tableRemove, SIGNAL(clicked(bool)), this, SLOT(remRow(void)));
+    connect(tableNew, SIGNAL(clicked(bool)), this, SLOT(newRow(void)));
+    connect(tableRemove, SIGNAL(clicked(bool)), this, SLOT(remRow(void)));
 }
 
 void Gui::writeOptions()
 {
-	QSettings* settings = *gwinshellInstance->settings;
-	if (settings == NULL) return;
+    QSettings* settings = *gwinshellInstance->settings;
+    if (settings == NULL) return;
 
-	settings->beginWriteArray("winshell/cmds");
-	for(int i = 0; i < table->rowCount(); ++i) {
-		if (table->item(i,0) == NULL || table->item(i,1) == NULL) continue;
-		if (table->item(i,0)->text() == "" || table->item(i,1)->text() == "") continue;
-		settings->setArrayIndex(i);
-		settings->setValue("name", table->item(i, 0)->text());
-		settings->setValue("file", table->item(i, 1)->text());
-		if (table->item(i,2) == NULL)
-			settings->setValue("args", "");
-		else
-			settings->setValue("args", table->item(i, 2)->text());
-	}
-	settings->endArray();
+    settings->beginWriteArray("winshell/cmds");
+    for(int i = 0; i < table->rowCount(); ++i) {
+        if (table->item(i,0) == NULL || table->item(i,1) == NULL) continue;
+        if (table->item(i,0)->text() == "" || table->item(i,1)->text() == "") continue;
+        settings->setArrayIndex(i);
+        settings->setValue("name", table->item(i, 0)->text());
+        settings->setValue("file", table->item(i, 1)->text());
+        if (table->item(i,2) == NULL)
+            settings->setValue("args", "");
+        else
+            settings->setValue("args", table->item(i, 2)->text());
+    }
+    settings->endArray();
 }
 
 void Gui::newRow() 
 {
-	table->insertRow(table->rowCount());
-	table->setCurrentCell(table->rowCount()-1, 0);
+    table->insertRow(table->rowCount());
+    table->setCurrentCell(table->rowCount()-1, 0);
 }
 
 void Gui::remRow()
 {
-	if (table->currentRow() != -1)
-		table->removeRow(table->currentRow());
+    if (table->currentRow() != -1)
+        table->removeRow(table->currentRow());
 }

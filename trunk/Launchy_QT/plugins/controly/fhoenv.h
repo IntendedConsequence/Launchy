@@ -5,9 +5,9 @@
 
 
 class FhoEnv {
-	public:
+    public:
 
-		static QString expand(QString str);
+        static QString expand(QString str);
 };
 
 

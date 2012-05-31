@@ -31,11 +31,11 @@ class FileBrowser : public QWidget
    Q_OBJECT
 
 public:
-	enum BrowseType
-	{
-		File,
-		Directory
-	};
+    enum BrowseType
+    {
+        File,
+        Directory
+    };
 
    /**
     *  Creates a FileBrowser with no file selected.

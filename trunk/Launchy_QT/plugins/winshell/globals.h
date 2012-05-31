@@ -22,9 +22,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <QString>
 
 struct winshellCmd {
-	QString name;
-	QString file;
-	QString args;
+    QString name;
+    QString file;
+    QString args;
 };
 
 #endif

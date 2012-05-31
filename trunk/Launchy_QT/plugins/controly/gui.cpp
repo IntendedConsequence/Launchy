@@ -22,18 +22,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "controly.h"
 
 Gui::Gui(QWidget* parent) 
-	: QWidget(parent)
+    : QWidget(parent)
 {
-	setupUi(this);
+    setupUi(this);
 
-	QSettings* settings = *gControlyInstance->settings;
-	if (settings == NULL)
-		return;
+    QSettings* settings = *gControlyInstance->settings;
+    if (settings == NULL)
+        return;
 }
 
 void Gui::writeOptions()
 {
-	QSettings* settings = *gControlyInstance->settings;
-	if (settings == NULL)
-		return;
+    QSettings* settings = *gControlyInstance->settings;
+    if (settings == NULL)
+        return;
 }

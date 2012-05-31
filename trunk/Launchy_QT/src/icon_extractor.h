@@ -26,23 +26,23 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 class IconExtractor : public QThread
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	IconExtractor();
-	void processIcon(const CatItem& item, bool highPriority = true);
-	void processIcons(const QList<CatItem>& newItems, bool reset = true);
-	void stop();
-	void run();
+    IconExtractor();
+    void processIcon(const CatItem& item, bool highPriority = true);
+    void processIcons(const QList<CatItem>& newItems, bool reset = true);
+    void stop();
+    void run();
 
 signals:
     void iconExtracted(int itemIndex, QString path, QIcon icon);
 
 private:
-	QIcon getIcon(const CatItem& item);
+    QIcon getIcon(const CatItem& item);
 
-	QMutex mutex;
-	QQueue<CatItem> items;
+    QMutex mutex;
+    QQueue<CatItem> items;
 };
 
 

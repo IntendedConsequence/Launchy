@@ -28,37 +28,37 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 class winshellPlugin : public QObject, public PluginInterface
 {
-	Q_OBJECT
-	Q_INTERFACES(PluginInterface)
+    Q_OBJECT
+    Q_INTERFACES(PluginInterface)
 
 
 public:
-	uint HASH_winshell;
-	uint HASH_FILE;
-	uint HASH_DIR;
+    uint HASH_winshell;
+    uint HASH_FILE;
+    uint HASH_DIR;
 
 private:
-	Gui* gui;
+    Gui* gui;
 public:
-	winshellPlugin() {
-		gui = NULL;
-		HASH_winshell = qHash(QString("winshell"));
-		HASH_DIR = qHash(QString("directory"));
-		HASH_FILE = qHash(QString("file"));
-	}
-	~winshellPlugin() {}
-	int msg(int msgId, void* wParam = NULL, void* lParam = NULL); 
+    winshellPlugin() {
+        gui = NULL;
+        HASH_winshell = qHash(QString("winshell"));
+        HASH_DIR = qHash(QString("directory"));
+        HASH_FILE = qHash(QString("file"));
+    }
+    ~winshellPlugin() {}
+    int msg(int msgId, void* wParam = NULL, void* lParam = NULL); 
 
-	void getID(uint*);
-	void getName(QString*);
-	void getCatalog(QList<CatItem>* items);
-	void getResults(QList<InputData>* id, QList<CatItem>* results);
-	void launchItem(QList<InputData>*, CatItem*);
-	void doDialog(QWidget* parent, QWidget**);
-	void endDialog(bool accept);
-	void getLabels(QList<InputData>* id);
-	void init();
-	QString getIcon();
+    void getID(uint*);
+    void getName(QString*);
+    void getCatalog(QList<CatItem>* items);
+    void getResults(QList<InputData>* id, QList<CatItem>* results);
+    void launchItem(QList<InputData>*, CatItem*);
+    void doDialog(QWidget* parent, QWidget**);
+    void endDialog(bool accept);
+    void getLabels(QList<InputData>* id);
+    void init();
+    QString getIcon();
 
 };
 

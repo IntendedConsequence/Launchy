@@ -29,27 +29,27 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 class PlatformWin : public PlatformBase 
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	PlatformWin(int& argc, char** argv);
-	~PlatformWin();
+    PlatformWin(int& argc, char** argv);
+    ~PlatformWin();
 
-	virtual void setPreferredIconSize(int size);
-	virtual QKeySequence getHotkey() const;
-	virtual bool setHotkey(const QKeySequence& newHotkey, QObject* receiver, const char* slot);
-	virtual QHash<QString, QList<QString> > getDirectories();
-	virtual QList<Directory> getDefaultCatalogDirectories();
-	virtual QString expandEnvironmentVars(QString);
-	virtual bool supportsAlphaBorder() const;
-	virtual bool isAlreadyRunning() const;
-	virtual void sendInstanceCommand(int command);
-	virtual bool getComputers(QStringList& computers) const;
+    virtual void setPreferredIconSize(int size);
+    virtual QKeySequence getHotkey() const;
+    virtual bool setHotkey(const QKeySequence& newHotkey, QObject* receiver, const char* slot);
+    virtual QHash<QString, QList<QString> > getDirectories();
+    virtual QList<Directory> getDefaultCatalogDirectories();
+    virtual QString expandEnvironmentVars(QString);
+    virtual bool supportsAlphaBorder() const;
+    virtual bool isAlreadyRunning() const;
+    virtual void sendInstanceCommand(int command);
+    virtual bool getComputers(QStringList& computers) const;
 
 private:
-	HANDLE localMutex, globalMutex;
-	LimitSingleInstance* instance;
-	MiniDumper minidumper;
+    HANDLE localMutex, globalMutex;
+    LimitSingleInstance* instance;
+    MiniDumper minidumper;
 };
 
 

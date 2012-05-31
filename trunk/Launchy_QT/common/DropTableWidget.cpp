@@ -3,9 +3,9 @@
 
 
 DropTableWidget::DropTableWidget(QWidget* pParent) :
-	QTableWidget(pParent)
+    QTableWidget(pParent)
 {
-	setAcceptDrops(true);
+    setAcceptDrops(true);
 }
 
 
@@ -16,17 +16,17 @@ DropTableWidget::~DropTableWidget()
 
 void DropTableWidget::dragEnterEvent(QDragEnterEvent *event)
 {
-	emit dragEnter(event);
+    emit dragEnter(event);
 }
 
 
 void DropTableWidget::dragMoveEvent(QDragMoveEvent *event)
 {
-	emit dragMove(event);
+    emit dragMove(event);
 }
 
 
 void DropTableWidget::dropEvent(QDropEvent *event)
 {
-	emit drop(event);
+    emit drop(event);
 }

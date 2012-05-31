@@ -42,11 +42,11 @@ class MyApp : public QApplication {
     Q_OBJECT
     public:
         MyApp(int argc, char** argv) : QApplication(argc,argv) {}
-	bool x11EventFilter ( XEvent * event ) {
-	    if (event->type == KeyPress) {
-		emit xkeyPressed(event);
-	    }
-	return false;
+    bool x11EventFilter ( XEvent * event ) {
+        if (event->type == KeyPress) {
+        emit xkeyPressed(event);
+        }
+    return false;
     }    
 signals:
     void xkeyPressed(XEvent*);
@@ -76,11 +76,11 @@ class PlatformUnix :  public PlatformBase
     bool setHotkey(const QKeySequence& key, QObject* receiver, const char* slot)
     {
 
-	GlobalShortcutManager::disconnect(oldKey, receiver, slot);
-	GlobalShortcutManager::connect(key, receiver, slot);
-	oldKey = key;
+    GlobalShortcutManager::disconnect(oldKey, receiver, slot);
+    GlobalShortcutManager::connect(key, receiver, slot);
+    oldKey = key;
         qDebug() << key << GlobalShortcutManager::isConnected(key);
-	return GlobalShortcutManager::isConnected(key);
+    return GlobalShortcutManager::isConnected(key);
     }
     
 
@@ -90,7 +90,7 @@ class PlatformUnix :  public PlatformBase
     }
 
     QString GetSettingsDirectory() { 
-	return "";
+    return "";
     }
 
     
@@ -101,12 +101,12 @@ class PlatformUnix :  public PlatformBase
     void RemoveFromNotificationArea() {};
     
     bool isAlreadyRunning() const {
-	return false;
+    return false;
     }
 
 
     virtual QHash<QString, QList<QString> > getDirectories();
-	virtual QString expandEnvironmentVars(QString txt);
+    virtual QString expandEnvironmentVars(QString txt);
 
     bool supportsAlphaBorder() const;
     /*

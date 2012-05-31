@@ -51,29 +51,29 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // This is also defined in WinIconProvider, remove from both locations if 64 bit build is produced
 QString aliasTo64(QString path) 
 {
-	QProcessEnvironment env = QProcessEnvironment::systemEnvironment ();
-	QString pf32 = env.value("PROGRAMFILES");
-	QString pf64 = env.value("PROGRAMW6432");
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment ();
+    QString pf32 = env.value("PROGRAMFILES");
+    QString pf64 = env.value("PROGRAMW6432");
 
-	// On 64 bit windows, 64 bit shortcuts don't resolve correctly from 32 bit executables, fix it here
-	QFileInfo pInfo(path);
+    // On 64 bit windows, 64 bit shortcuts don't resolve correctly from 32 bit executables, fix it here
+    QFileInfo pInfo(path);
 
-	if (env.contains("PROGRAMW6432") && pInfo.isSymLink() && pf32 != pf64) {
-		if (QDir::toNativeSeparators(pInfo.symLinkTarget()).contains(pf32)) {
-			QString path64 = QDir::toNativeSeparators(pInfo.symLinkTarget());
-			path64.replace(pf32, pf64);
-			if (QFileInfo(path64).exists()) {
-				path = path64;
-			}
-		}
-		else if (pInfo.symLinkTarget().contains("system32")) {
-			QString path32 = QDir::toNativeSeparators(pInfo.symLinkTarget());
-			if (!QFileInfo(path32).exists()) {
-				path = path32.replace("system32", "sysnative");
-			}
-		}
-	}
-	return path;
+    if (env.contains("PROGRAMW6432") && pInfo.isSymLink() && pf32 != pf64) {
+        if (QDir::toNativeSeparators(pInfo.symLinkTarget()).contains(pf32)) {
+            QString path64 = QDir::toNativeSeparators(pInfo.symLinkTarget());
+            path64.replace(pf32, pf64);
+            if (QFileInfo(path64).exists()) {
+                path = path64;
+            }
+        }
+        else if (pInfo.symLinkTarget().contains("system32")) {
+            QString path32 = QDir::toNativeSeparators(pInfo.symLinkTarget());
+            if (!QFileInfo(path32).exists()) {
+                path = path32.replace("system32", "sysnative");
+            }
+        }
+    }
+    return path;
 }
 
 int getDesktop() { return DESKTOP_WINDOWS; }
@@ -81,65 +81,65 @@ int getDesktop() { return DESKTOP_WINDOWS; }
 /*
 void runProgram(QString path, QString args) {
 
-	SHELLEXECUTEINFO ShExecInfo;
-	bool elevated = (GetKeyState(VK_SHIFT) & 0x80000000) != 0 && (GetKeyState(VK_CONTROL) & 0x80000000) != 0;
+    SHELLEXECUTEINFO ShExecInfo;
+    bool elevated = (GetKeyState(VK_SHIFT) & 0x80000000) != 0 && (GetKeyState(VK_CONTROL) & 0x80000000) != 0;
 
-	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
-	ShExecInfo.fMask = SEE_MASK_FLAG_NO_UI;
-	ShExecInfo.hwnd = NULL;
-	ShExecInfo.lpVerb = elevated ? L"runas" : NULL;
-	ShExecInfo.lpFile = (LPCTSTR)path.utf16();
-	if (args != "") {
-		ShExecInfo.lpParameters = (LPCTSTR)args.utf16();
-	} else {
-		ShExecInfo.lpParameters = NULL;
-	}
-	QDir dir(path);
-	QFileInfo info(path);
-	if (!info.isDir() && info.isFile())
-		dir.cdUp();	
-	QString filePath = QDir::toNativeSeparators(dir.absolutePath());
-	ShExecInfo.lpDirectory = (LPCTSTR)filePath.utf16();
-	ShExecInfo.nShow = SW_NORMAL;
-	ShExecInfo.hInstApp = NULL;
+    ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+    ShExecInfo.fMask = SEE_MASK_FLAG_NO_UI;
+    ShExecInfo.hwnd = NULL;
+    ShExecInfo.lpVerb = elevated ? L"runas" : NULL;
+    ShExecInfo.lpFile = (LPCTSTR)path.utf16();
+    if (args != "") {
+        ShExecInfo.lpParameters = (LPCTSTR)args.utf16();
+    } else {
+        ShExecInfo.lpParameters = NULL;
+    }
+    QDir dir(path);
+    QFileInfo info(path);
+    if (!info.isDir() && info.isFile())
+        dir.cdUp();    
+    QString filePath = QDir::toNativeSeparators(dir.absolutePath());
+    ShExecInfo.lpDirectory = (LPCTSTR)filePath.utf16();
+    ShExecInfo.nShow = SW_NORMAL;
+    ShExecInfo.hInstApp = NULL;
 
-	ShellExecuteEx(&ShExecInfo);	
+    ShellExecuteEx(&ShExecInfo);    
 }
 */
 void runProgram(QString path, QString args, bool translateSeparators) {
 
-	// This 64 bit aliasing needs to be gotten rid of if we have a 64 bit build
-	path = aliasTo64(path);
+    // This 64 bit aliasing needs to be gotten rid of if we have a 64 bit build
+    path = aliasTo64(path);
 
 
-	SHELLEXECUTEINFO ShExecInfo;
-	bool elevated = (GetKeyState(VK_SHIFT) & 0x80000000) != 0 && (GetKeyState(VK_CONTROL) & 0x80000000) != 0;
+    SHELLEXECUTEINFO ShExecInfo;
+    bool elevated = (GetKeyState(VK_SHIFT) & 0x80000000) != 0 && (GetKeyState(VK_CONTROL) & 0x80000000) != 0;
 
-	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
-	ShExecInfo.fMask = SEE_MASK_FLAG_NO_UI;
-	ShExecInfo.fMask = NULL;
-	ShExecInfo.hwnd = NULL;
-	ShExecInfo.lpVerb = elevated ? L"runas" : NULL;
-	QString filePath = translateSeparators ? QDir::toNativeSeparators(path) : path;
-	ShExecInfo.lpFile = (LPCTSTR)filePath.utf16();
+    ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+    ShExecInfo.fMask = SEE_MASK_FLAG_NO_UI;
+    ShExecInfo.fMask = NULL;
+    ShExecInfo.hwnd = NULL;
+    ShExecInfo.lpVerb = elevated ? L"runas" : NULL;
+    QString filePath = translateSeparators ? QDir::toNativeSeparators(path) : path;
+    ShExecInfo.lpFile = (LPCTSTR)filePath.utf16();
 
-	if (args != "") {
-		ShExecInfo.lpParameters = (LPCTSTR)args.utf16();
-	} else {
-		ShExecInfo.lpParameters = NULL;
-	}
+    if (args != "") {
+        ShExecInfo.lpParameters = (LPCTSTR)args.utf16();
+    } else {
+        ShExecInfo.lpParameters = NULL;
+    }
 
 
-	QDir dir(path);
-	QFileInfo info(path);
-	if (!info.isDir() && info.isFile())
-		dir.cdUp();
-	QString directory = QDir::toNativeSeparators(dir.absolutePath());
-	ShExecInfo.lpDirectory = (LPCTSTR)directory.utf16();
-	ShExecInfo.nShow = SW_NORMAL;
-	ShExecInfo.hInstApp = NULL;
+    QDir dir(path);
+    QFileInfo info(path);
+    if (!info.isDir() && info.isFile())
+        dir.cdUp();
+    QString directory = QDir::toNativeSeparators(dir.absolutePath());
+    ShExecInfo.lpDirectory = (LPCTSTR)directory.utf16();
+    ShExecInfo.nShow = SW_NORMAL;
+    ShExecInfo.hInstApp = NULL;
 
-	ShellExecuteEx(&ShExecInfo);	
+    ShellExecuteEx(&ShExecInfo);    
 }
 
 #endif
@@ -168,12 +168,12 @@ int getDesktop()
 {
     QStringList list = QProcess::systemEnvironment();
     foreach(QString s, list)
-	{
-	    if (s.startsWith("GNOME_DESKTOP_SESSION"))
-		return DESKTOP_GNOME;
-	    else if (s.startsWith("KDE_FULL_SESSION"))
-		return DESKTOP_KDE;
-	}
+    {
+        if (s.startsWith("GNOME_DESKTOP_SESSION"))
+        return DESKTOP_GNOME;
+        else if (s.startsWith("KDE_FULL_SESSION"))
+        return DESKTOP_KDE;
+    }
     return -1;
 }
 

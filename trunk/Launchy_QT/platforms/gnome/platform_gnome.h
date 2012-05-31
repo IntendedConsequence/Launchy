@@ -33,8 +33,8 @@ class PlatformGnome : public PlatformUnix
  private:
 
     Q_OBJECT
-	Q_INTERFACES(PlatformBase)
-	public:
+    Q_INTERFACES(PlatformBase)
+    public:
     PlatformGnome();
     ~PlatformGnome();
     

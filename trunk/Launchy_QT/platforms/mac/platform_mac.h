@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 class PlatformMac : public PlatformBase
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
         PlatformMac(int& argc, char** argv);
@@ -32,10 +32,10 @@ public:
 
         virtual void setPreferredIconSize(int size) { size = size; return; }
         virtual QKeySequence getHotkey() const { return oldKey; }
-	virtual bool setHotkey(const QKeySequence& newHotkey, QObject* receiver, const char* slot);
-	virtual QHash<QString, QList<QString> > getDirectories();
-	virtual QList<Directory> getDefaultCatalogDirectories();
-	virtual QString expandEnvironmentVars(QString);
+    virtual bool setHotkey(const QKeySequence& newHotkey, QObject* receiver, const char* slot);
+    virtual QHash<QString, QList<QString> > getDirectories();
+    virtual QList<Directory> getDefaultCatalogDirectories();
+    virtual QString expandEnvironmentVars(QString);
         virtual bool supportsAlphaBorder() const { return true; }
         virtual bool isAlreadyRunning() const;
         virtual void alterItem(CatItem* item);

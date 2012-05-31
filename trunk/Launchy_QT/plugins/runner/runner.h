@@ -27,36 +27,36 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 class RunnerPlugin : public QObject, public PluginInterface
 {
-	Q_OBJECT
-	Q_INTERFACES(PluginInterface)
+    Q_OBJECT
+    Q_INTERFACES(PluginInterface)
 
 public:
-	RunnerPlugin()
-	{
-		gui.reset();
-		HASH_runner = qHash(QString("runner"));
-	}
-	~RunnerPlugin() {}
-	
-	int msg(int msgId, void* wParam = NULL, void* lParam = NULL); 
+    RunnerPlugin()
+    {
+        gui.reset();
+        HASH_runner = qHash(QString("runner"));
+    }
+    ~RunnerPlugin() {}
+    
+    int msg(int msgId, void* wParam = NULL, void* lParam = NULL); 
 
 private:
-	void setPath(QString * path);
-	void getID(uint*);
-	void getName(QString*);
-	void getCatalog(QList<CatItem>* items);
-	void getResults(QList<InputData>* inputData, QList<CatItem>* results);
-	void launchItem(QList<InputData>* inputData, CatItem* item);
-	void doDialog(QWidget* parent, QWidget**);
-	void endDialog(bool accept);
-	void init();
-	QString getIcon();
-	QString getIcon(QString file);
+    void setPath(QString * path);
+    void getID(uint*);
+    void getName(QString*);
+    void getCatalog(QList<CatItem>* items);
+    void getResults(QList<InputData>* inputData, QList<CatItem>* results);
+    void launchItem(QList<InputData>* inputData, CatItem* item);
+    void doDialog(QWidget* parent, QWidget**);
+    void endDialog(bool accept);
+    void init();
+    QString getIcon();
+    QString getIcon(QString file);
 
-	uint HASH_WEBSITE;
-	uint HASH_runner;
-	QList<runnerCmd> cmds;
-	QString libPath;
+    uint HASH_WEBSITE;
+    uint HASH_runner;
+    QList<runnerCmd> cmds;
+    QString libPath;
     boost::shared_ptr<Gui> gui;
 };
 

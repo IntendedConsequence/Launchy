@@ -29,16 +29,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 class AnimationLabel : public QLabel
 {
 public:
-	AnimationLabel(QWidget* parent);
-	virtual ~AnimationLabel();
-	void LoadAnimation(const QString& animationPath);
+    AnimationLabel(QWidget* parent);
+    virtual ~AnimationLabel();
+    void LoadAnimation(const QString& animationPath);
 
 public slots:
-	void Start();
-	void Stop();
+    void Start();
+    void Stop();
 
 private:
-	QPointer<QMovie> animation;
+    QPointer<QMovie> animation;
 };
 
 

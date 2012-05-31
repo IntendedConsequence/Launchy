@@ -30,26 +30,26 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 class SettingsManager : public QObject
 {
 public:
-	SettingsManager();
-	void load();
+    SettingsManager();
+    void load();
 
-	bool isPortable() const;
-	QList<QString> directory(QString name) const;
-	QString catalogFilename() const;
-	QString historyFilename() const;
-	QString skinPath(const QString& skinName) const;
-	void setPortable(bool makePortable);
-	void removeAll();
-	void setProfileName(const QString& name);
-	static QList<Directory> readCatalogDirectories();
-	static void writeCatalogDirectories(QList<Directory>& directories);
+    bool isPortable() const;
+    QList<QString> directory(QString name) const;
+    QString catalogFilename() const;
+    QString historyFilename() const;
+    QString skinPath(const QString& skinName) const;
+    void setPortable(bool makePortable);
+    void removeAll();
+    void setProfileName(const QString& name);
+    static QList<Directory> readCatalogDirectories();
+    static void writeCatalogDirectories(QList<Directory>& directories);
 
 private:
-	QString configDirectory(bool portable) const;
+    QString configDirectory(bool portable) const;
 
-	bool portable;
-	QString profileName;
-	QHash<QString, QList<QString> > dirs;
+    bool portable;
+    QString profileName;
+    QHash<QString, QList<QString> > dirs;
 };
 
 

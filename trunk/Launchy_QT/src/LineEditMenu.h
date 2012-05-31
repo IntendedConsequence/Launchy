@@ -7,14 +7,14 @@
 
 class LineEditMenu : public QLabel
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	LineEditMenu(QWidget* parent = 0);
-	void contextMenuEvent(QContextMenuEvent *event);
+    LineEditMenu(QWidget* parent = 0);
+    void contextMenuEvent(QContextMenuEvent *event);
 
 signals:
-	void menuEvent(QContextMenuEvent*);
+    void menuEvent(QContextMenuEvent*);
 };
 
 

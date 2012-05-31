@@ -18,7 +18,7 @@ QIcon GnomeIconProvider::icon(const QFileInfo& info) const
             return QIcon(info.absoluteFilePath());
         }
     if (info.fileName().endsWith(".ico", Qt::CaseInsensitive))
-	return QIcon(info.absoluteFilePath());
+    return QIcon(info.absoluteFilePath());
 
     gdk_threads_enter();
     GnomeIconLookupResultFlags resultFlags;

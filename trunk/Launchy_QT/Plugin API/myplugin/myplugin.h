@@ -27,30 +27,30 @@ class Gui;
 
 class mypluginPlugin : public QObject, public PluginInterface
 {
-	Q_OBJECT
-	Q_INTERFACES(PluginInterface)
+    Q_OBJECT
+    Q_INTERFACES(PluginInterface)
 
 public:
-	uint HASH_myplugin;
+    uint HASH_myplugin;
 
 public:
-	mypluginPlugin();
-	~mypluginPlugin();
-	int msg(int msgId, void* wParam = NULL, void* lParam = NULL);
+    mypluginPlugin();
+    ~mypluginPlugin();
+    int msg(int msgId, void* wParam = NULL, void* lParam = NULL);
 
-	void getLabels(QList<InputData>*);
-	void getID(uint*);
-	void getName(QString*);
-	void getResults(QList<InputData>* id, QList<CatItem>* results);
-	void getCatalog(QList<CatItem>* items);
-	void launchItem(QList<InputData>*, CatItem*);
-	void doDialog(QWidget* parent, QWidget**);
-	void endDialog(bool accept);
-	void init();
-	QString getIcon();
+    void getLabels(QList<InputData>*);
+    void getID(uint*);
+    void getName(QString*);
+    void getResults(QList<InputData>* id, QList<CatItem>* results);
+    void getCatalog(QList<CatItem>* items);
+    void launchItem(QList<InputData>*, CatItem*);
+    void doDialog(QWidget* parent, QWidget**);
+    void endDialog(bool accept);
+    void init();
+    QString getIcon();
 
 private:
-	Gui* gui;
+    Gui* gui;
 };
 
 extern mypluginPlugin* gmypluginInstance;

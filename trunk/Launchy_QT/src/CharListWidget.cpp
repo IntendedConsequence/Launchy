@@ -22,39 +22,39 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 CharListWidget::CharListWidget(QWidget* parent) : 
-	QListWidget(parent)
+    QListWidget(parent)
 {
 #ifdef Q_WS_X11
-	setWindowFlags( windowFlags() | Qt::Tool | Qt::SplashScreen);
+    setWindowFlags( windowFlags() | Qt::Tool | Qt::SplashScreen);
 #endif
-	setAttribute(Qt::WA_AlwaysShowToolTips);
+    setAttribute(Qt::WA_AlwaysShowToolTips);
 
-	setAlternatingRowColors(true);
+    setAlternatingRowColors(true);
 }
 
 
 void CharListWidget::keyPressEvent(QKeyEvent* key)
 {
-	emit keyPressed(key);
-	QListWidget::keyPressEvent(key);
-	key->ignore();
+    emit keyPressed(key);
+    QListWidget::keyPressEvent(key);
+    key->ignore();
 }
 
 
 void CharListWidget::mouseDoubleClickEvent(QMouseEvent* /*event*/)
 {
-	QKeyEvent key(QEvent::KeyPress, Qt::Key_Enter, NULL);
-	emit keyPressed(&key);
+    QKeyEvent key(QEvent::KeyPress, Qt::Key_Enter, NULL);
+    emit keyPressed(&key);
 }
 
 
 void CharListWidget::focusInEvent(QFocusEvent* event)
 {
-	emit focusIn(event);
+    emit focusIn(event);
 }
 
 
 void CharListWidget::focusOutEvent(QFocusEvent* event)
 {
-	emit focusOut(event);
+    emit focusOut(event);
 }

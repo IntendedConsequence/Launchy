@@ -26,50 +26,50 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <QtNetwork>
 
 class Process : public QObject {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	QString query;
-	QHttp http;
-	QBuffer resBuffer;
-	QString result;
-	QEventLoop loop;
-	Process(QString url, QString matchExpression);
-	void run();
+    QString query;
+    QHttp http;
+    QBuffer resBuffer;
+    QString result;
+    QEventLoop loop;
+    Process(QString url, QString matchExpression);
+    void run();
 public slots:
-	void httpGetFinished(bool error);
+    void httpGetFinished(bool error);
 
 private:
-	QString url;
-	QString matchExpression;
+    QString url;
+    QString matchExpression;
 
-	int id;
-	static int currentId;
+    int id;
+    static int currentId;
 };
 
 class gcalcPlugin : public QObject, public PluginInterface
 {
 
-	Q_OBJECT
-	Q_INTERFACES(PluginInterface)
+    Q_OBJECT
+    Q_INTERFACES(PluginInterface)
 //	QRegExp* reg;
 
 public:
-	uint HASH_gcalc;
-	QString libPath;
+    uint HASH_gcalc;
+    QString libPath;
 public:
-	gcalcPlugin() {
-		HASH_gcalc = qHash(QString("gcalc"));
+    gcalcPlugin() {
+        HASH_gcalc = qHash(QString("gcalc"));
 //		reg = NULL;
-	}
-	~gcalcPlugin() { /*if (reg) delete reg; */}
-	int msg(int msgId, void* wParam = NULL, void* lParam = NULL); 
-	void setPath(QString * path);
-	void getID(uint*);
-	void getName(QString*);
-	void getResults(QList<InputData>* id, QList<CatItem>* results);
-	void getCatalog(QList<CatItem>* items);
-	void init();
-	QString getIcon();
+    }
+    ~gcalcPlugin() { /*if (reg) delete reg; */}
+    int msg(int msgId, void* wParam = NULL, void* lParam = NULL); 
+    void setPath(QString * path);
+    void getID(uint*);
+    void getName(QString*);
+    void getResults(QList<InputData>* id, QList<CatItem>* results);
+    void getCatalog(QList<CatItem>* items);
+    void init();
+    QString getIcon();
 
 public slots:
 

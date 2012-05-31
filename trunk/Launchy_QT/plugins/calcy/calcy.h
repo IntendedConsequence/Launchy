@@ -31,29 +31,29 @@ using namespace boost;
 
 class calcyPlugin : public QObject, public PluginInterface
 {
-	Q_OBJECT
-	Q_INTERFACES(PluginInterface)
+    Q_OBJECT
+    Q_INTERFACES(PluginInterface)
 
 public:
-	calcyPlugin();
-	~calcyPlugin();
-	int msg(int msgId, void* wParam = NULL, void* lParam = NULL); 
-	void setPath(QString * path);
-	void getLabels(QList<InputData>*);
-	void getID(uint*);
-	void getName(QString*);
-	void getResults(QList<InputData>* id, QList<CatItem>* results);
-	void launchItem(QList<InputData>* inputData, CatItem* item);
-	void doDialog(QWidget* parent, QWidget**);
-	void endDialog(bool accept);
-	void init();
-	QString getIcon();
+    calcyPlugin();
+    ~calcyPlugin();
+    int msg(int msgId, void* wParam = NULL, void* lParam = NULL); 
+    void setPath(QString * path);
+    void getLabels(QList<InputData>*);
+    void getID(uint*);
+    void getName(QString*);
+    void getResults(QList<InputData>* id, QList<CatItem>* results);
+    void launchItem(QList<InputData>* inputData, CatItem* item);
+    void doDialog(QWidget* parent, QWidget**);
+    void endDialog(bool accept);
+    void init();
+    QString getIcon();
 
 private:
-	uint HASH_CALCY;
-	QString libPath;
-	QRegExp reg;
-	shared_ptr<Gui> gui;
+    uint HASH_CALCY;
+    QString libPath;
+    QRegExp reg;
+    shared_ptr<Gui> gui;
 };
 
 

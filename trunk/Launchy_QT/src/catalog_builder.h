@@ -32,31 +32,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 class CatalogBuilder : public QObject, public INotifyProgressStep
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	CatalogBuilder(PluginHandler* plugs);
-	Catalog* getCatalog() const { return catalog; }
-	int getProgress() const { return progress; }
-	int isRunning() const { return progress < CATALOG_PROGRESS_MAX; }
-	bool progressStep(int newStep);
+    CatalogBuilder(PluginHandler* plugs);
+    Catalog* getCatalog() const { return catalog; }
+    int getProgress() const { return progress; }
+    int isRunning() const { return progress < CATALOG_PROGRESS_MAX; }
+    bool progressStep(int newStep);
 
 public slots:
-	void buildCatalog();
+    void buildCatalog();
 
 signals:
-	void catalogIncrement(int);
-	void catalogFinished();
+    void catalogIncrement(int);
+    void catalogFinished();
 
 private:
-	void indexDirectory(const QString& dir, const QStringList& filters, bool fdirs, bool fbin, int depth);
+    void indexDirectory(const QString& dir, const QStringList& filters, bool fdirs, bool fbin, int depth);
 
-	PluginHandler* plugins;
-	Catalog* catalog;
-	QSet<QString> indexed;
-	int progress;
-	int currentItem;
-	int totalItems;
+    PluginHandler* plugins;
+    Catalog* catalog;
+    QSet<QString> indexed;
+    int progress;
+    int currentItem;
+    int totalItems;
 };
 
 

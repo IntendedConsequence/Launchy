@@ -6,11 +6,11 @@
 
 class FhoRes {
 
-	public:
+    public:
 
-		static QString getResourceString(QString &resourceIdentifier);
-		static QString getResourceString(QString &resourceName, int resourceId);
-		static QString getResourceString(HINSTANCE hLib, int resourceId);
+        static QString getResourceString(QString &resourceIdentifier);
+        static QString getResourceString(QString &resourceName, int resourceId);
+        static QString getResourceString(HINSTANCE hLib, int resourceId);
 
 };
 

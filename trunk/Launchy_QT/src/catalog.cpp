@@ -25,91 +25,91 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 bool CatLessNoPtr(CatItem & a, CatItem & b)
 {
-	bool less = CatLess(&a, &b);
+    bool less = CatLess(&a, &b);
 
 /*	if (less)
-		qDebug() << a.lowName << "(" << a.usage << ") < " << b.lowName << " (" << b.usage << ")";
-	else
-		qDebug() << b.lowName << "(" << b.usage << ") < " << a.lowName << " (" << a.usage << ")";
+        qDebug() << a.lowName << "(" << a.usage << ") < " << b.lowName << " (" << b.usage << ")";
+    else
+        qDebug() << b.lowName << "(" << b.usage << ") < " << a.lowName << " (" << a.usage << ")";
 */
-	return less;
+    return less;
 }
 
 
 bool CatLess(CatItem* a, CatItem* b)
 {
-	// Items with negative usage are lowest priority
-	if (a->usage < 0 && b->usage >= 0)
-		return false;
-	if (b->usage < 0 && a->usage >= 0)
-		return true;
+    // Items with negative usage are lowest priority
+    if (a->usage < 0 && b->usage >= 0)
+        return false;
+    if (b->usage < 0 && a->usage >= 0)
+        return true;
 
-	bool localEqual = a->lowName == gSearchText;
-	bool otherEqual = b->lowName == gSearchText;
+    bool localEqual = a->lowName == gSearchText;
+    bool otherEqual = b->lowName == gSearchText;
 
-	// Exact match between search text and item name has higest priority
-	if (localEqual && !otherEqual)
-		return true;
-	if (!localEqual && otherEqual)
-		return false;
+    // Exact match between search text and item name has higest priority
+    if (localEqual && !otherEqual)
+        return true;
+    if (!localEqual && otherEqual)
+        return false;
 
-	int localFind = a->lowName.indexOf(gSearchText);
-	int otherFind = b->lowName.indexOf(gSearchText);
+    int localFind = a->lowName.indexOf(gSearchText);
+    int otherFind = b->lowName.indexOf(gSearchText);
 
-	if (gSearchText.count() == 1)
-	{
-		// Match at the start
-		if (localFind == 0 && otherFind != 0)
-			return true;
-		else if (localFind != 0 && otherFind == 0)
-			return false;
+    if (gSearchText.count() == 1)
+    {
+        // Match at the start
+        if (localFind == 0 && otherFind != 0)
+            return true;
+        else if (localFind != 0 && otherFind == 0)
+            return false;
 
-		// Higher usage
-		if (a->usage > b->usage)
-			return true;
-		if (a->usage < b->usage)
-			return false;
-	}
+        // Higher usage
+        if (a->usage > b->usage)
+            return true;
+        if (a->usage < b->usage)
+            return false;
+    }
 
-	// Contiguous text anywhere in the item name
-	if (localFind != -1 && otherFind == -1)
-		return true;
-	else if (localFind == -1 && otherFind != -1)
-		return false;
+    // Contiguous text anywhere in the item name
+    if (localFind != -1 && otherFind == -1)
+        return true;
+    else if (localFind == -1 && otherFind != -1)
+        return false;
 
-	if (localFind != -1 && otherFind != -1)
-	{
-		// Both have word matches
-		// Higher usage
-		if (a->usage > b->usage)
-			return true;
-		if (a->usage < b->usage)
-			return false;
+    if (localFind != -1 && otherFind != -1)
+    {
+        // Both have word matches
+        // Higher usage
+        if (a->usage > b->usage)
+            return true;
+        if (a->usage < b->usage)
+            return false;
 
-		// Contiguous text nearer the start of the item name
-		if (localFind < otherFind)
-			return true;
-		else if (otherFind < localFind)
-			return false;
-	}
-	else
-	{
-		// Higher usage
-		if (a->usage > b->usage)
-			return true;
-		if (a->usage < b->usage)
-			return false;
-	}
+        // Contiguous text nearer the start of the item name
+        if (localFind < otherFind)
+            return true;
+        else if (otherFind < localFind)
+            return false;
+    }
+    else
+    {
+        // Higher usage
+        if (a->usage > b->usage)
+            return true;
+        if (a->usage < b->usage)
+            return false;
+    }
 
-	int localLen = a->lowName.count();
-	int otherLen = b->lowName.count();
+    int localLen = a->lowName.count();
+    int otherLen = b->lowName.count();
 
-	// Favour shorter item names
-	if (localLen < otherLen)
-		return true;
-	if (localLen > otherLen)
-		return false;
+    // Favour shorter item names
+    if (localLen < otherLen)
+        return true;
+    if (localLen > otherLen)
+        return false;
 
-	// Absolute tiebreaker to prevent loops
-	return a->fullPath < b->fullPath;
+    // Absolute tiebreaker to prevent loops
+    return a->fullPath < b->fullPath;
 }

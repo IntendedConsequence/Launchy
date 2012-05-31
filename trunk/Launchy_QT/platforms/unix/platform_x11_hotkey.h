@@ -102,11 +102,11 @@ private:
         X11KeyTriggerManager()
                 : QObject(QCoreApplication::instance())
         {
-	    // This does't always catch hotkeys if the app hasn't had mouse
-	    // attention yet, so I built the xkeypressed system instead which
-	    // monitors x11events as opposed to qt events
-	    //qApp->installEventFilter(this);
-	    connect(qApp, SIGNAL(xkeyPressed(XEvent*)), this, SLOT(xkeyPressed(XEvent*)));
+        // This does't always catch hotkeys if the app hasn't had mouse
+        // attention yet, so I built the xkeypressed system instead which
+        // monitors x11events as opposed to qt events
+        //qApp->installEventFilter(this);
+        connect(qApp, SIGNAL(xkeyPressed(XEvent*)), this, SLOT(xkeyPressed(XEvent*)));
         }
 
         static X11KeyTriggerManager* instance_;
@@ -209,7 +209,7 @@ public:
                         mod |= alt_mask;
 
                 Qt_XK_Keygroup kg;
-		kg.num = 0;
+        kg.num = 0;
                 kg.sym[0] = 0;
                 code &= ~Qt::KeyboardModifierMask;
 

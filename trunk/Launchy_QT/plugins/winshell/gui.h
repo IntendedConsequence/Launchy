@@ -27,18 +27,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 class Gui : public QWidget, private Ui::Dlg
 {
-	
+    
 
   Q_OBJECT
 private:
 public:
-	Gui(QWidget* parent);
-	~Gui() { this->hide(); }
-	void writeOptions();
+    Gui(QWidget* parent);
+    ~Gui() { this->hide(); }
+    void writeOptions();
 
 public slots:
-	void newRow();
-	void remRow();
+    void newRow();
+    void remRow();
 };
 
 #endif 

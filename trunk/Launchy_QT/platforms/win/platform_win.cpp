@@ -30,89 +30,89 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 class LaunchyWidgetWin : public LaunchyWidget
 {
 public:
-	LaunchyWidgetWin(CommandFlags command) :
-		LaunchyWidget(command)
-	{
-		commandMessageId = RegisterWindowMessage(_T("LaunchyCommand"));
-	}
+    LaunchyWidgetWin(CommandFlags command) :
+        LaunchyWidget(command)
+    {
+        commandMessageId = RegisterWindowMessage(_T("LaunchyCommand"));
+    }
 
-	virtual bool winEvent(MSG* msg, long* result)
-	{
-		switch (msg->message)
-		{
-		case WM_SETTINGCHANGE:
-			// Refresh Launchy's environment on settings changes
-			if (msg->lParam && _tcscmp((TCHAR*)msg->lParam, _T("Environment")) == 0)
-			{
-				UpdateEnvironment();
-			}
-			break;
+    virtual bool winEvent(MSG* msg, long* result)
+    {
+        switch (msg->message)
+        {
+        case WM_SETTINGCHANGE:
+            // Refresh Launchy's environment on settings changes
+            if (msg->lParam && _tcscmp((TCHAR*)msg->lParam, _T("Environment")) == 0)
+            {
+                UpdateEnvironment();
+            }
+            break;
 
-		case WM_ENDSESSION:
-			// Ensure settings are saved
-			saveSettings();
-			break;
+        case WM_ENDSESSION:
+            // Ensure settings are saved
+            saveSettings();
+            break;
 
-		// Might need to capture these two messages if Vista gives any problems with alpha borders
-		// when restoring from standby
-		case WM_POWERBROADCAST:
-			break;
-		case WM_WTSSESSION_CHANGE:
-			break;
+        // Might need to capture these two messages if Vista gives any problems with alpha borders
+        // when restoring from standby
+        case WM_POWERBROADCAST:
+            break;
+        case WM_WTSSESSION_CHANGE:
+            break;
 
-		default:
-			if (msg->message == commandMessageId)
-			{
-				// A Launchy startup command
-				executeStartupCommand(msg->wParam);
-			}
-			break;
-		}
-		return LaunchyWidget::winEvent(msg, result);
-	}
+        default:
+            if (msg->message == commandMessageId)
+            {
+                // A Launchy startup command
+                executeStartupCommand(msg->wParam);
+            }
+            break;
+        }
+        return LaunchyWidget::winEvent(msg, result);
+    }
 
 private:
-	UINT commandMessageId;
+    UINT commandMessageId;
 };
 
 
 // Create the main widget for the application
 LaunchyWidget* createLaunchyWidget(CommandFlags command)
 {
-	return new LaunchyWidgetWin(command);
+    return new LaunchyWidgetWin(command);
 }
 
 
 
 PlatformWin::PlatformWin(int& argc, char** argv) :
-	PlatformBase(argc, argv),
-	minidumper(_T("Launchy"))
+    PlatformBase(argc, argv),
+    minidumper(_T("Launchy"))
 {
-	instance = new LimitSingleInstance(_T("Local\\{ASDSAD0-DCC6-49b5-9C61-ASDSADIIIJJL}"));
+    instance = new LimitSingleInstance(_T("Local\\{ASDSAD0-DCC6-49b5-9C61-ASDSADIIIJJL}"));
 
-	// Create local and global application mutexes so that installer knows when
-	// Launchy is running
-	localMutex = CreateMutex(NULL,0,_T("LaunchyMutex"));
-	globalMutex = CreateMutex(NULL,0,_T("Global\\LaunchyMutex"));
+    // Create local and global application mutexes so that installer knows when
+    // Launchy is running
+    localMutex = CreateMutex(NULL,0,_T("LaunchyMutex"));
+    globalMutex = CreateMutex(NULL,0,_T("Global\\LaunchyMutex"));
 
-	icons = (QFileIconProvider*)new WinIconProvider();
+    icons = (QFileIconProvider*)new WinIconProvider();
 }
 
 
 PlatformWin::~PlatformWin()
 {
-	if (localMutex)
-		CloseHandle(localMutex);
-	if (globalMutex)
-		CloseHandle(globalMutex);
-	delete instance;
+    if (localMutex)
+        CloseHandle(localMutex);
+    if (globalMutex)
+        CloseHandle(globalMutex);
+    delete instance;
         instance = NULL;
 }
 
 
 void PlatformWin::setPreferredIconSize(int size)
 {
-	((WinIconProvider*)icons)->setPreferredIconSize(size);
+    ((WinIconProvider*)icons)->setPreferredIconSize(size);
 }
 
 
@@ -121,15 +121,15 @@ QHash<QString, QList<QString> > PlatformWin::getDirectories()
     QHash<QString, QList<QString> > out;
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, "Launchy", "Launchy");
     QString iniFilename = settings.fileName();
-	QFileInfo info(iniFilename);
-	QString userDataPath = info.absolutePath();
+    QFileInfo info(iniFilename);
+    QString userDataPath = info.absolutePath();
 
-	out["config"] << userDataPath;
+    out["config"] << userDataPath;
     out["portableConfig"] << qApp->applicationDirPath();
-	out["skins"] << qApp->applicationDirPath() + "/skins"
-				 << userDataPath + "/skins";
+    out["skins"] << qApp->applicationDirPath() + "/skins"
+                 << userDataPath + "/skins";
     out["plugins"] << qApp->applicationDirPath() + "/plugins"
-				   << userDataPath + "/plugins";
+                   << userDataPath + "/plugins";
     out["defSkin"] << "Default";
 
     return out;
@@ -138,104 +138,104 @@ QHash<QString, QList<QString> > PlatformWin::getDirectories()
 
 QList<Directory> PlatformWin::getDefaultCatalogDirectories()
 {
-	QList<Directory> list;
-	Directory tmp;
+    QList<Directory> list;
+    Directory tmp;
 
-	tmp.name = GetShellDirectory(CSIDL_COMMON_STARTMENU);
-	tmp.types << "*.lnk";
-	list.append(tmp);
-	
-	tmp.name = GetShellDirectory(CSIDL_STARTMENU);
-	list.append(tmp);
-	tmp.name = "Utilities\\";
-	tmp.indexDirs = false;
-	list.append(tmp);
+    tmp.name = GetShellDirectory(CSIDL_COMMON_STARTMENU);
+    tmp.types << "*.lnk";
+    list.append(tmp);
+    
+    tmp.name = GetShellDirectory(CSIDL_STARTMENU);
+    list.append(tmp);
+    tmp.name = "Utilities\\";
+    tmp.indexDirs = false;
+    list.append(tmp);
 
-	Directory tmp2;
-	tmp2.name = "%appdata%\\Microsoft\\Internet Explorer\\Quick Launch";
-	tmp2.types << "*.*";
-	list.append(tmp2);
-	return list;
+    Directory tmp2;
+    tmp2.name = "%appdata%\\Microsoft\\Internet Explorer\\Quick Launch";
+    tmp2.types << "*.*";
+    list.append(tmp2);
+    return list;
 }
 
 
 QString PlatformWin::expandEnvironmentVars(QString txt) 
 {
-	QString result;
+    QString result;
 
-	DWORD size = ExpandEnvironmentStrings((LPCWSTR)txt.utf16(), NULL, 0);
-	if (size > 0)
-	{
-		TCHAR* buffer = new TCHAR[size];
-		ExpandEnvironmentStrings((LPCWSTR)txt.utf16(), buffer, size);
-		result = QString::fromUtf16((const ushort*)buffer);
-		delete[] buffer;
-	}
+    DWORD size = ExpandEnvironmentStrings((LPCWSTR)txt.utf16(), NULL, 0);
+    if (size > 0)
+    {
+        TCHAR* buffer = new TCHAR[size];
+        ExpandEnvironmentStrings((LPCWSTR)txt.utf16(), buffer, size);
+        result = QString::fromUtf16((const ushort*)buffer);
+        delete[] buffer;
+    }
 
-	return result;
+    return result;
 }
 
 
 void PlatformWin::sendInstanceCommand(int command)
 {
-	UINT commandMessageId = RegisterWindowMessage(_T("LaunchyCommand"));
-	PostMessage(HWND_BROADCAST, commandMessageId, command, 0);
+    UINT commandMessageId = RegisterWindowMessage(_T("LaunchyCommand"));
+    PostMessage(HWND_BROADCAST, commandMessageId, command, 0);
 }
 
 
 bool PlatformWin::isAlreadyRunning() const
 {
-	return instance->IsAnotherInstanceRunning();
+    return instance->IsAnotherInstanceRunning();
 }
 
 
 // Mandatory functions
 QKeySequence PlatformWin::getHotkey() const
 {
-	return hotkey;
+    return hotkey;
 }
 
 bool PlatformWin::setHotkey(const QKeySequence& newHotkey, QObject* receiver, const char* slot)
 {
-	GlobalShortcutManager::disconnect(hotkey, receiver, slot);
-	GlobalShortcutManager::connect(newHotkey, receiver, slot);
-	hotkey = newHotkey;
-	return GlobalShortcutManager::isConnected(newHotkey);
+    GlobalShortcutManager::disconnect(hotkey, receiver, slot);
+    GlobalShortcutManager::connect(newHotkey, receiver, slot);
+    hotkey = newHotkey;
+    return GlobalShortcutManager::isConnected(newHotkey);
 }
 
 
 bool PlatformWin::supportsAlphaBorder() const
 {
-	return true;
+    return true;
 }
 
 
 bool PlatformWin::getComputers(QStringList& computers) const
 {
-	// Get a list of domains. This should return nothing or fail when we're on a workgroup
-	QStringList domains;
-	if (EnumerateNetworkServers(domains, SV_TYPE_DOMAIN_ENUM))
-	{
-		foreach(QString domain, domains)
-		{
-			EnumerateNetworkServers(computers, SV_TYPE_WORKSTATION | SV_TYPE_SERVER, domain.utf16());
-		}
+    // Get a list of domains. This should return nothing or fail when we're on a workgroup
+    QStringList domains;
+    if (EnumerateNetworkServers(domains, SV_TYPE_DOMAIN_ENUM))
+    {
+        foreach(QString domain, domains)
+        {
+            EnumerateNetworkServers(computers, SV_TYPE_WORKSTATION | SV_TYPE_SERVER, domain.utf16());
+        }
 
-		// If names have been retrieved from more than one domain, they'll need sorting
-		if (domains.length() > 1)
-		{
-			computers.sort();
-		}
+        // If names have been retrieved from more than one domain, they'll need sorting
+        if (domains.length() > 1)
+        {
+            computers.sort();
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	return EnumerateNetworkServers(computers, SV_TYPE_WORKSTATION | SV_TYPE_SERVER);
+    return EnumerateNetworkServers(computers, SV_TYPE_WORKSTATION | SV_TYPE_SERVER);
 }
 
 
 // Create the application object
 QApplication* createApplication(int& argc, char** argv)
 {
-	return new PlatformWin(argc, argv);
+    return new PlatformWin(argc, argv);
 }

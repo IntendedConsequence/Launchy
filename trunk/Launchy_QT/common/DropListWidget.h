@@ -30,7 +30,7 @@ class DropListWidget : public QListWidget
 
 public:
 
-	DropListWidget(QWidget* pParent = NULL);
+    DropListWidget(QWidget* pParent = NULL);
    ~DropListWidget();
 
 protected:

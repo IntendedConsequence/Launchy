@@ -4,24 +4,24 @@
 #include <QtNetwork>
 class IconCache : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	IconCache(const QString& path);
+    IconCache(const QString& path);
 
-	QString getIconPath(const QString& site);
+    QString getIconPath(const QString& site);
 
 public slots:
-	void finished(QNetworkReply*);
-	void query(QUrl url);
+    void finished(QNetworkReply*);
+    void query(QUrl url);
 
 signals:
-	void findIcon(QUrl url);
+    void findIcon(QUrl url);
 
 
 private:
-	QString cachePath;
-	QNetworkAccessManager nam;
+    QString cachePath;
+    QNetworkAccessManager nam;
 //	QEventLoop loop;
 };
 

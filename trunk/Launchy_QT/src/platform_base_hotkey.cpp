@@ -64,15 +64,15 @@ void GlobalShortcutManager::connect(const QKeySequence& key, QObject* receiver, 
         }
 
         QObject::connect(t, SIGNAL(activated()), receiver, slot);
-		
+        
 }
 
 bool GlobalShortcutManager::isConnected(const QKeySequence& key)
 {
-	KeyTrigger* t = instance()->triggers_[key];
-	if (!t)
-		return false;
-	return t->isConnected();
+    KeyTrigger* t = instance()->triggers_[key];
+    if (!t)
+        return false;
+    return t->isConnected();
 }
 
 /**
@@ -90,8 +90,8 @@ void GlobalShortcutManager::disconnect(const QKeySequence& key, QObject* receive
 
         QObject::disconnect(t, SIGNAL(activated()), receiver, slot);
 
-	delete instance()->triggers_.take(key);
-	//        if (!t->isUsed()) {
+    delete instance()->triggers_.take(key);
+    //        if (!t->isUsed()) {
         //        delete instance()->triggers_.take(key);
         //}
 }

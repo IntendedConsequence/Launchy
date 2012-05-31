@@ -23,9 +23,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 Gui::Gui(QWidget* parent) 
-	: QWidget(parent)
+    : QWidget(parent)
 {
-	setupUi(this);
+    setupUi(this);
         QSettings* settings = *gmypluginInstance->settings;
         if (settings == NULL)
             return;

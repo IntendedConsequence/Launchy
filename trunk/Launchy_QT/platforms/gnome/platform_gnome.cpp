@@ -30,7 +30,7 @@ PlatformGnome::PlatformGnome() : PlatformUnix ()
 {
 //    if (icons)
 //		delete icons;
-	icons.reset((QFileIconProvider*) new GnomeIconProvider());
+    icons.reset((QFileIconProvider*) new GnomeIconProvider());
 //    icons = (QFileIconProvider*) new GnomeIconProvider();
 }
 
@@ -59,22 +59,22 @@ PlatformGnome::~PlatformGnome()
 void PlatformGnome::alterItem(CatItem* item) {
     
     if (!item->fullPath.endsWith(".desktop", Qt::CaseInsensitive))
-	return;
+    return;
     GError * error = NULL;
 
     gdk_threads_enter();
     GnomeDesktopItem* ditem = gnome_desktop_item_new_from_file(item->fullPath.toLocal8Bit().data(),
-							       (GnomeDesktopItemLoadFlags) 0,//GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS,
-							       &error);
+                                   (GnomeDesktopItemLoadFlags) 0,//GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS,
+                                   &error);
     if (error) {
-	g_error_free(error);
-	gdk_threads_leave();
-	return;
+    g_error_free(error);
+    gdk_threads_leave();
+    return;
     }
 
     if (!ditem) {
-	gdk_threads_leave();
-	return;
+    gdk_threads_leave();
+    return;
     }
 
     // The gnome errors are coming from here, because it falls back to
@@ -89,11 +89,11 @@ void PlatformGnome::alterItem(CatItem* item) {
     //item->fullPath = gnome_desktop_item_get_localestring(ditem, "Exec");
     QString name = gnome_desktop_item_get_localestring(ditem, "Name");
     if (name.size() >= item->shortName.size() - 8) {
-	item->shortName = name;
-	item->lowName = item->shortName.toLower();
+    item->shortName = name;
+    item->lowName = item->shortName.toLower();
     }
     
-	
+    
     gnome_desktop_item_unref (ditem);    
     gdk_threads_leave();
     return;
@@ -102,18 +102,18 @@ void PlatformGnome::alterItem(CatItem* item) {
 bool PlatformGnome::Execute(QString path, QString args)
 {
     if (!path.endsWith(".desktop", Qt::CaseInsensitive))
-	return false;
+    return false;
 
     gdk_threads_enter();
 
     GError * error = NULL;
     GnomeDesktopItem* ditem = gnome_desktop_item_new_from_file(path.toLocal8Bit().data(),
-							       (GnomeDesktopItemLoadFlags) 0,
-							       &error);
+                                   (GnomeDesktopItemLoadFlags) 0,
+                                   &error);
     if (error) {
-	g_error_free(error);
-	gdk_threads_leave();
-	return false;
+    g_error_free(error);
+    gdk_threads_leave();
+    return false;
     }
     if (!ditem) return false;
     
@@ -121,9 +121,9 @@ bool PlatformGnome::Execute(QString path, QString args)
     GList * list = NULL;
     args = args.trimmed();
     if (args.size() > 0) {
-	foreach(QString s, args.split(" ")) {
-	    list = g_list_append(list, s.toLocal8Bit().data());
-	}
+    foreach(QString s, args.split(" ")) {
+        list = g_list_append(list, s.toLocal8Bit().data());
+    }
     }
 
     
@@ -132,12 +132,12 @@ bool PlatformGnome::Execute(QString path, QString args)
     g_list_free(list);
 
     if (error) {
-	g_error_free(error);
-	gnome_desktop_item_unref(ditem);
-	gdk_threads_leave();
-	return false;
+    g_error_free(error);
+    gnome_desktop_item_unref(ditem);
+    gdk_threads_leave();
+    return false;
     }
-			      
+                  
     gnome_desktop_item_unref(ditem);
     gdk_threads_leave();
     return true;
