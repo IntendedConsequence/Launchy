@@ -6,7 +6,7 @@ INCLUDEPATH += ../../src/
 PRECOMPILED_HEADER = precompiled.h
 DEFINES += WITH_GUI
 
-# UI_DIR = ../../plugins/controly/
+#UI_DIR = ../../plugins/controly/
 FORMS = dlg.ui
 HEADERS = plugin_interface.h \
     controly.h \
